@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.notesdemo.presentation.createnotes.CreateNotesFragment
 import com.example.notesdemo.presentation.notes.ViewNotesFragment
 
-
 class MainActivity : AppCompatActivity() {
     private lateinit var mainFragmentLayout: FrameLayout
     val viewNotesFragment : Fragment = ViewNotesFragment()
