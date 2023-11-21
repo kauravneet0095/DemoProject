@@ -12,6 +12,7 @@ import com.example.notesdemo.presentation.notes.ViewNotesFragment
 class MainActivity : AppCompatActivity() {
     private lateinit var mainFragmentLayout: FrameLayout
     val viewNotesFragment : Fragment = ViewNotesFragment()
+    
     val createNotesFragment : Fragment = CreateNotesFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
