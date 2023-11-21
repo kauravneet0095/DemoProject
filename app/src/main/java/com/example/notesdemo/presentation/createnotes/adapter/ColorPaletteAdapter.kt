@@ -22,5 +22,8 @@ class ColorPaletteAdapter(private val colorList: ArrayList<ColorPaletteModel>) :
 
     override fun onBindViewHolder(holder: ColorPaletteVH, position: Int) {
         holder.binding?.cardColorPalette?.setCardBackgroundColor(colorList[position].paletteColor)
+        holder.binding?.cardColorPalette?.setOnClickListener{
+            val selectedColor = colorList[position].paletteColor
+        }
     }
 }

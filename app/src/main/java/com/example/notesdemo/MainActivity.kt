@@ -20,8 +20,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.inTransaction {
             add(R.id.main_fragment, createNotesFragment)
 
-
-
         }
     }
 
