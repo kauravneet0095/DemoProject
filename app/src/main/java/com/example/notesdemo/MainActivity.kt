@@ -19,6 +19,9 @@ class MainActivity : AppCompatActivity() {
         mainFragmentLayout = findViewById<FrameLayout>(R.id.main_fragment)
         supportFragmentManager.inTransaction {
             add(R.id.main_fragment, createNotesFragment)
+
+
+
         }
     }
 
