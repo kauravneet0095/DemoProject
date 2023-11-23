@@ -19,7 +19,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Title" />
+            android:text="@string/def_text_enter_note_title" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_desc"
@@ -34,7 +34,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_title"
-            tools:text="desc" />
+            android:text="@string/def_text_enter_description" />
         <Button
             android:id="@+id/btn_save_note"
             android:layout_width="match_parent"
@@ -42,7 +42,7 @@
             android:layout_margin="8dp"
             android:fontFamily="@font/neon_font"
             android:gravity="center"
-            android:text="Save Notes"
+            android:text="@string/def_text_save_notes"
             android:padding="8dp"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
