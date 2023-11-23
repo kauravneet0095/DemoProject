@@ -1,8 +1,8 @@
-package com.example.notesdemo.presentation
+package com.example.notesdemo.presentation.notes.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.notesapp.notes.domain.model.NotesEntity
+import com.example.notesdemo.domain.model.NotesEntity
 import com.example.notesdemo.domain.use_cases.AddNotesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
