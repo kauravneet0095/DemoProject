@@ -1,6 +1,6 @@
 package com.example.notesdemo.domain.use_cases
 
-import com.example.notesapp.notes.domain.model.NotesEntity
+import com.example.notesdemo.domain.model.NotesEntity
 import com.example.notesapp.notes.domain.repository.NotesRepository
 import javax.inject.Inject
 

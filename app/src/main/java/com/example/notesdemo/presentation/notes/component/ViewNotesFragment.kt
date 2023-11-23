@@ -1,4 +1,4 @@
-package com.example.notesdemo.presentation.notes
+package com.example.notesdemo.presentation.notes.component
 
 import android.os.Bundle
 import android.view.LayoutInflater

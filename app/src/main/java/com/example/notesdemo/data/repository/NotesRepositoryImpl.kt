@@ -1,7 +1,7 @@
 package com.example.notesdemo.data.repository
 
 import com.example.notesdemo.data.data_source.db.NotesDao
-import com.example.notesapp.notes.domain.model.NotesEntity
+import com.example.notesdemo.domain.model.NotesEntity
 import com.example.notesapp.notes.domain.repository.NotesRepository
 import javax.inject.Inject
 

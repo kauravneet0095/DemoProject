@@ -1,6 +1,6 @@
 package com.example.notesapp.notes.domain.repository
 
-import com.example.notesapp.notes.domain.model.NotesEntity
+import com.example.notesdemo.domain.model.NotesEntity
 
 interface NotesRepository {
 

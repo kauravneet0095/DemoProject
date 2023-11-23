@@ -10,6 +10,7 @@ import com.example.notesdemo.presentation.createnotes.adapter.vh.ColorPaletteVH
 class ColorPaletteAdapter(private val colorList: ArrayList<ColorPaletteModel>) :
     RecyclerView.Adapter<ColorPaletteVH>() {
 
+    var onItemClicked: ((colorList: ColorPaletteModel) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorPaletteVH {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.rv_item_color_palettes, parent, false)
@@ -21,9 +22,14 @@ class ColorPaletteAdapter(private val colorList: ArrayList<ColorPaletteModel>) :
     }
 
     override fun onBindViewHolder(holder: ColorPaletteVH, position: Int) {
-        holder.binding?.cardColorPalette?.setCardBackgroundColor(colorList[position].paletteColor)
-        holder.binding?.cardColorPalette?.setOnClickListener{
-            val selectedColor = colorList[position].paletteColor
+        colorList[position].paletteColor?.let {
+            holder.binding?.cardColorPalette?.setCardBackgroundColor(
+                it
+            )
+        }
+        holder.binding?.cardColorPalette?.setOnClickListener {
+            onItemClicked?.invoke(colorList[position])
         }
     }
 }
+
