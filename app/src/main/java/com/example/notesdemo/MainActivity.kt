@@ -10,8 +10,6 @@ import com.example.notesdemo.presentation.createnotes.CreateNotesFragment
 import com.example.notesdemo.presentation.notes.component.ViewNotesFragment
 class MainActivity : AppCompatActivity() {
     private lateinit var mainFragmentLayout: FrameLayout
-    val viewNotesFragment : Fragment = ViewNotesFragment()
-    
     val createNotesFragment : Fragment = CreateNotesFragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
+    private inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
         val fragmentTransaction = beginTransaction()
         fragmentTransaction.func()
         fragmentTransaction.commit()
