@@ -1,7 +1,8 @@
 package com.example.notesdemo.domain.use_cases
 
-import com.example.notesdemo.domain.model.NotesEntity
+import android.content.Context
 import com.example.notesapp.notes.domain.repository.NotesRepository
+import com.example.notesdemo.domain.model.NotesEntity
 import javax.inject.Inject
 
 
@@ -13,5 +14,10 @@ class AddNotesUseCase @Inject constructor(private val notesRepository: NotesRepo
 
     suspend fun editNotes(note: NotesEntity) {
         notesRepository.editNote(note)
+    }
+
+    suspend fun getAllNotes(context: Context): List<NotesEntity> {
+        return notesRepository.getAllNotes(context)
+
     }
 }
