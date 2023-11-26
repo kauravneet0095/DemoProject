@@ -1,6 +1,7 @@
 package com.example.notesdemo.presentation.createnotes
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,11 +33,11 @@ class CreateNotesFragment : Fragment() {
 
     private fun setColorOptionsAdapter() {
         val colorList = ColorConstants.getColors(requireContext())
-
         val adapter = ColorPaletteAdapter(colorList)
         binding?.rvColorPalette?.adapter = adapter
         adapter.onItemClicked = { colorList ->
             selectedColor = colorList
+            Log.e("color Adapter click", colorList.toString())
         }
     }
 
@@ -58,6 +59,10 @@ class CreateNotesFragment : Fragment() {
                 ) { message ->
                     println(message)
                 }
+                // change fragment from create to view notes
+//                (activity as AppCompatActivity).replaceFragment(R.id.main_fragment,ViewNotesFragment())
+
+                Log.e("NotesDb", notesViewModel?.getAllNotes(requireContext()).toString())
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.example.notesdemo.presentation.notes.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.notesdemo.domain.model.NotesEntity
@@ -10,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class NotesViewModel @Inject constructor(private val notesUseCase: AddNotesUseCase): ViewModel() {
+class NotesViewModel @Inject constructor(private val notesUseCase: AddNotesUseCase) : ViewModel() {
 
     private var addNotesJob: Job? = null
 
@@ -26,5 +27,13 @@ class NotesViewModel @Inject constructor(private val notesUseCase: AddNotesUseCa
             notesUseCase.editNotes(notesEntity)
             onNoteEdited.invoke("Note Edited Successfully !!")
         }
+    }
+
+    fun getAllNotes(context: Context): List<NotesEntity>? {
+        var notesEntity: List<NotesEntity>? = null
+        viewModelScope.launch {
+            notesEntity = notesUseCase.getAllNotes(context)
+        }
+        return notesEntity
     }
 }
