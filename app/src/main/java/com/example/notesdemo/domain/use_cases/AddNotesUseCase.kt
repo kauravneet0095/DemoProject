@@ -18,6 +18,5 @@ class AddNotesUseCase @Inject constructor(private val notesRepository: NotesRepo
 
     suspend fun getAllNotes(context: Context): List<NotesEntity> {
         return notesRepository.getAllNotes(context)
-
     }
 }

@@ -16,6 +16,7 @@ interface NotesDao {
 
     @Update
     suspend fun updateNotes(notesEntity: NotesEntity)
+
     @Query("SELECT * FROM user_notes ORDER BY id ASC")
     fun getAllNotes(context: Context): List<NotesEntity>
 
