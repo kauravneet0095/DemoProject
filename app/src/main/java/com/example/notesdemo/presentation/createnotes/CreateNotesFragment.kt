@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.notesdemo.databinding.FragmentCreateNotesBinding
 import com.example.notesdemo.domain.model.NotesEntity
 import com.example.notesdemo.presentation.createnotes.adapter.ColorPaletteAdapter
@@ -22,6 +23,7 @@ class CreateNotesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCreateNotesBinding.inflate(inflater)
+        notesViewModel = ViewModelProvider(this)[NotesViewModel::class.java]
         return binding?.root
     }
 
@@ -50,11 +52,10 @@ class CreateNotesFragment : Fragment() {
             } else {
                 notesViewModel?.addNotes(
                     NotesEntity(
-                        123,
-                        binding?.etTitle?.text.toString(),
-                        binding?.etDesc?.text.toString(),
-                        selectedColor?.paletteColor.toString(),
-                        false, "", ""
+                        title = binding?.etTitle?.text.toString(),
+                        description = binding?.etDesc?.text.toString(),
+                        cardColor = selectedColor?.paletteColor.toString(),
+                        isEdited = false
                     )
                 ) { message ->
                     println(message)
@@ -62,7 +63,7 @@ class CreateNotesFragment : Fragment() {
                 // change fragment from create to view notes
 //                (activity as AppCompatActivity).replaceFragment(R.id.main_fragment,ViewNotesFragment())
 
-                Log.e("NotesDb", notesViewModel?.getAllNotes(requireContext()).toString())
+                Log.e("NotesDb", notesViewModel?.getAllNotes()?.size.toString())
             }
         }
     }

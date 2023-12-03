@@ -12,12 +12,9 @@ import com.example.notesdemo.domain.model.NotesEntity
 interface NotesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addNotes(notesEntity: NotesEntity)
+    fun addNotes(notesEntity: NotesEntity)
 
-    @Update
-    suspend fun updateNotes(notesEntity: NotesEntity)
-
-    @Query("SELECT * FROM user_notes ORDER BY id ASC")
-    fun getAllNotes(context: Context): List<NotesEntity>
+    @Query("SELECT * FROM user_notes")
+    fun getAllNotes(): List<NotesEntity>?
 
 }
