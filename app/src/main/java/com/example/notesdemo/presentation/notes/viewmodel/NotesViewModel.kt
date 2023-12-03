@@ -1,6 +1,5 @@
 package com.example.notesdemo.presentation.notes.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.notesdemo.NotesApplication
@@ -9,7 +8,6 @@ import com.example.notesdemo.domain.model.NotesEntity
 import com.example.notesdemo.domain.repository.NotesRepository
 import com.example.notesdemo.domain.use_cases.AddNotesUseCase
 import kotlinx.coroutines.launch
-
 
 class NotesViewModel : ViewModel() {
 
