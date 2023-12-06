@@ -56,14 +56,14 @@ class CreateNotesFragment : Fragment() {
                         description = binding?.etDesc?.text.toString(),
                         cardColor = selectedColor?.paletteColor.toString(),
                         isEdited = false
-                    )
+                    ),requireContext()
                 ) { message ->
                     println(message)
                 }
                 // change fragment from create to view notes
 //                (activity as AppCompatActivity).replaceFragment(R.id.main_fragment,ViewNotesFragment())
 
-                Log.e("NotesDb", notesViewModel?.getAllNotes()?.size.toString())
+                Log.e("NotesDb", notesViewModel?.getAllNotes(requireContext()).toString())
             }
         }
     }

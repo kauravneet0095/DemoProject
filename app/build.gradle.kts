@@ -53,10 +53,17 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
 
-
     //Color Picker
     implementation("com.github.Dhaval2404:ColorPicker:2.3")
 
-    implementation("androidx.room:room-runtime:2.6.1")
-    annotationProcessor("androidx.room:room-compiler:2.6.1")
+
+    //Room Database
+    annotationProcessor ("android.arch.persistence.room:compiler:1.1.1")
+    implementation ("androidx.room:room-runtime:2.4.2")
+    annotationProcessor ("androidx.room:room-compiler:2.4.2")
+    implementation ("com.airbnb.android:lottie:5.2.0")
+    implementation ("androidx.room:room-runtime:2.4.2")
+    implementation ("androidx.room:room-ktx:2.4.2")
+    kapt ("androidx.room:room-compiler:2.4.2")
+
 }
