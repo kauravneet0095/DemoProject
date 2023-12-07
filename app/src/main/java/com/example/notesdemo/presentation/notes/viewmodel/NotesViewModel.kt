@@ -1,5 +1,7 @@
 package com.example.notesdemo.presentation.notes.viewmodel
 
+import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.notesdemo.NotesApplication
@@ -18,17 +20,17 @@ class NotesViewModel : ViewModel() {
         AddNotesUseCase(notesRepository)
     }
 
-    fun addNotes(notesEntity: NotesEntity, onNoteAdded: (String) -> Unit) {
+    fun addNotes(notesEntity: NotesEntity,context: Context, onNoteAdded: (String) -> Unit) {
         viewModelScope.launch {
-            notesUseCase.addNotes(notesEntity)
+            notesUseCase.addNotes(notesEntity,context)
             onNoteAdded.invoke("Note Added Successfully !!")
         }
     }
 
-    fun getAllNotes(): List<NotesEntity>? {
-        var notesEntity: List<NotesEntity>? = null
+    fun getAllNotes(context: Context): LiveData<List<NotesEntity>>? {
+        var notesEntity: LiveData<List<NotesEntity>>? = null
         viewModelScope.launch {
-            notesEntity = notesUseCase.getAllNotes()
+            notesEntity = notesUseCase.getAllNotes(context)
         }
         return notesEntity
     }

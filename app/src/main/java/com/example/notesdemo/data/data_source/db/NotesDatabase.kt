@@ -6,9 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.notesdemo.domain.model.NotesEntity
 
-@Database(entities = [NotesEntity::class], version = 1)
+@Database(entities = [NotesEntity::class], version = 2)
 abstract class NotesDatabase : RoomDatabase() {
-    abstract val notesDao: NotesDao
+    abstract fun notesDao(): NotesDao
     companion object {
         @Volatile
         var instance: NotesDatabase? = null
@@ -31,6 +31,5 @@ abstract class NotesDatabase : RoomDatabase() {
 
             return instance
         }
-
     }
 }
