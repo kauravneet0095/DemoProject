@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.notesdemo.R
 import com.example.notesdemo.databinding.FragmentViewNotesBinding
-import com.example.notesdemo.presentation.notes.adapter.NotesAdapter
-import com.example.notesdemo.presentation.notes.model.NotesModel
+import com.example.notesdemo.presentation.notes.component.adapter.NotesAdapter
+import com.example.notesdemo.presentation.notes.component.model.NotesModel
 import com.example.notesdemo.utils.enums.ColorsEnum
 
 class ViewNotesFragment : Fragment() {

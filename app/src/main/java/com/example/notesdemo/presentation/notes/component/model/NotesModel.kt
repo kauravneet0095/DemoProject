@@ -1,4 +1,4 @@
-package com.example.notesdemo.presentation.notes.model
+package com.example.notesdemo.presentation.notes.component.model
 
 import com.example.notesdemo.R
 

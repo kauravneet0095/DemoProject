@@ -1,4 +1,4 @@
-package com.example.notesdemo.presentation.notes.adapter
+package com.example.notesdemo.presentation.notes.component.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notesdemo.R
-import com.example.notesdemo.presentation.notes.adapter.vh.NotesVH
-import com.example.notesdemo.presentation.notes.model.NotesModel
+import com.example.notesdemo.presentation.notes.component.adapter.vh.NotesVH
+import com.example.notesdemo.presentation.notes.component.model.NotesModel
 
 class NotesAdapter(private val notesList: ArrayList<NotesModel>, val context: Context) :
     RecyclerView.Adapter<NotesVH>() {

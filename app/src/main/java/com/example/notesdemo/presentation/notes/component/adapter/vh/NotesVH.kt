@@ -1,4 +1,4 @@
-package com.example.notesdemo.presentation.notes.adapter.vh
+package com.example.notesdemo.presentation.notes.component.adapter.vh
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
