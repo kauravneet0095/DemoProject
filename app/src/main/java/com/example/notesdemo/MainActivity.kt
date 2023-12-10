@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mainFragmentLayout = findViewById<FrameLayout>(R.id.main_fragment)
+        mainFragmentLayout = findViewById(R.id.main_fragment)
         supportFragmentManager.inTransaction {
             add(R.id.main_fragment, createNotesFragment)
 
