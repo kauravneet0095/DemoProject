@@ -1,22 +1,14 @@
 package com.example.notesdemo
 
 import android.app.Application
-import android.content.Context
 import com.example.notesdemo.data.data_source.db.NotesDatabase
+import com.example.notesdemo.data.repository.NotesRepositoryImpl
+import com.example.notesdemo.domain.repository.NotesRepository
 
 class NotesApplication: Application() {
 
-    companion object {
-        var notesDatabase: NotesDatabase? = null
-    }
+    private val database by lazy { NotesDatabase.getInstance(this) }
+    val repository by lazy { NotesRepositoryImpl(database?.notesDao()) }
 
-    override fun onCreate() {
-        super.onCreate()
-        notesDatabase = initialiseDB(applicationContext)
-    }
-
-    private fun initialiseDB(context: Context): NotesDatabase? {
-        return NotesDatabase.getInstance(context)
-    }
 
 }

@@ -3,21 +3,18 @@ package com.example.notesdemo.presentation.notes.viewmodel
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.notesdemo.NotesApplication
-import com.example.notesdemo.data.repository.NotesRepositoryImpl
 import com.example.notesdemo.domain.model.NotesEntity
 import com.example.notesdemo.domain.repository.NotesRepository
 import com.example.notesdemo.domain.use_cases.AddNotesUseCase
 import kotlinx.coroutines.launch
 
-class NotesViewModel : ViewModel() {
+class NotesViewModel(repository: NotesRepository) : ViewModel() {
 
-    private val notesRepository: NotesRepository by lazy {
-        NotesRepositoryImpl(NotesApplication.notesDatabase)
-    }
     private val notesUseCase: AddNotesUseCase by lazy {
-        AddNotesUseCase(notesRepository)
+        AddNotesUseCase(repository)
     }
 
     fun addNotes(notesEntity: NotesEntity,context: Context, onNoteAdded: (String) -> Unit) {
@@ -27,11 +24,22 @@ class NotesViewModel : ViewModel() {
         }
     }
 
-    fun getAllNotes(context: Context): LiveData<List<NotesEntity>>? {
+    suspend fun getAllNotes(): LiveData<List<NotesEntity>>? {
         var notesEntity: LiveData<List<NotesEntity>>? = null
-        viewModelScope.launch {
-            notesEntity = notesUseCase.getAllNotes(context)
+        val job = viewModelScope.launch {
+            notesEntity = notesUseCase.getAllNotes()
         }
+        job.join()
         return notesEntity
+    }
+}
+
+class NotesViewModelFactory(private val repository: NotesRepository) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(NotesViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return NotesViewModel(repository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

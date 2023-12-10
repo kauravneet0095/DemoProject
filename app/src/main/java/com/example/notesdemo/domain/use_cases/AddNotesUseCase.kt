@@ -11,7 +11,7 @@ class AddNotesUseCase constructor(private val notesRepository: NotesRepository) 
         notesRepository.addNote(note,context)
     }
 
-    fun getAllNotes(context: Context): LiveData<List<NotesEntity>>? {
-        return notesRepository.getAllNotes(context)
+    fun getAllNotes(): LiveData<List<NotesEntity>>? {
+        return notesRepository.getAllNotes()
     }
 }

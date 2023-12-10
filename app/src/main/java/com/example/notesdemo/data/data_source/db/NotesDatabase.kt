@@ -14,22 +14,17 @@ abstract class NotesDatabase : RoomDatabase() {
         var instance: NotesDatabase? = null
         private const val DATABASE_NAME = "notes_database"
 
-        fun getInstance(context: Context): NotesDatabase? {
-            if (instance == null) {
-                synchronized(NotesDatabase::class.java)
-                {
-                    if (instance == null) {
-                        Room.databaseBuilder(
-                            context, NotesDatabase::class.java,
-                            DATABASE_NAME
-                        )
-                            .fallbackToDestructiveMigration()
-                            .build().also { instance = it }
-                    }
-                }
+        fun getInstance(context: Context): NotesDatabase {
+            return instance ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    NotesDatabase::class.java,
+                    DATABASE_NAME
+                ).fallbackToDestructiveMigration().build()
+                Companion.instance = instance
+                // return instance
+                instance
             }
-
-            return instance
         }
     }
 }

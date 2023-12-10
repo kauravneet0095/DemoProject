@@ -6,6 +6,6 @@ import com.example.notesdemo.domain.model.NotesEntity
 
 interface NotesRepository {
     fun addNote(notesEntity: NotesEntity,context: Context)
-    fun getAllNotes(context: Context): LiveData<List<NotesEntity>>?
+    fun getAllNotes(): LiveData<List<NotesEntity>>?
 
 }
