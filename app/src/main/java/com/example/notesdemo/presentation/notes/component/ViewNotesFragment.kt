@@ -5,28 +5,43 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.notesdemo.R
+import com.example.notesdemo.NotesApplication
 import com.example.notesdemo.databinding.FragmentViewNotesBinding
 import com.example.notesdemo.presentation.notes.component.adapter.NotesAdapter
 import com.example.notesdemo.presentation.notes.component.model.NotesModel
+import com.example.notesdemo.presentation.notes.viewmodel.NotesViewModel
+import com.example.notesdemo.presentation.notes.viewmodel.NotesViewModelFactory
 import com.example.notesdemo.utils.enums.ColorsEnum
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ViewNotesFragment : Fragment() {
     private var binding: FragmentViewNotesBinding? = null
+    private var notesViewModel: NotesViewModel? = null
+    private lateinit var notesAdapter: NotesAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentViewNotesBinding.inflate(inflater)
+        notesViewModel = ViewModelProvider(
+            this,
+            NotesViewModelFactory((requireActivity().application as NotesApplication).repository)
+        )[NotesViewModel::class.java]
+        CoroutineScope(Dispatchers.IO).launch {
+            setData()
+        }
         return binding?.rvNotes
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpRv(dataList())
+//        setUpRv(notesViewModel?.getAllNotes())
 
     }
 
@@ -110,13 +125,34 @@ class ViewNotesFragment : Fragment() {
         return notesList
     }
 
-    private fun setUpRv(notesList: ArrayList<NotesModel>) {
-        val recyclerView: RecyclerView? = view?.findViewById<RecyclerView>(R.id.rv_notes)
+    /*  private fun setUpRv(notesList: LiveData<List<NotesEntity>>?) {
+          val recyclerView: RecyclerView? = view?.findViewById<RecyclerView>(R.id.rv_notes)
+          val staggeredGridLayoutManager =
+              StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+          recyclerView?.layoutManager = staggeredGridLayoutManager
+          val adapter = NotesAdapter(notesList, requireContext())
+          recyclerView?.adapter = adapter
+      }*/
+
+    private suspend fun setData() {
         val staggeredGridLayoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        recyclerView?.layoutManager = staggeredGridLayoutManager
-        val adapter = NotesAdapter(notesList, requireContext())
-        recyclerView?.adapter = adapter
+        binding?.rvNotes?.layoutManager = staggeredGridLayoutManager
+
+        notesAdapter = NotesAdapter(ArrayList<NotesModel>(), requireContext())
+        binding?.rvNotes?.adapter = notesAdapter
+
+        notesViewModel?.getAllNotes()?.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
+                binding?.rvNotes?.visibility = View.GONE
+                binding?.tvEmptyDb?.visibility = View.VISIBLE
+            } else {
+                binding?.rvNotes?.visibility = View.VISIBLE
+                binding?.tvEmptyDb?.visibility = View.GONE
+
+                notesAdapter.setData(it as ArrayList<NotesModel>)
+            }
+        }
     }
 
 

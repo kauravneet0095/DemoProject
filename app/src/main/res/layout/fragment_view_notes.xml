@@ -23,5 +23,21 @@
             app:spanCount="2"
             tools:itemCount="20"
             tools:listitem="@layout/notes_tiles" />
+
+
+        <TextView
+            android:id="@+id/tvEmptyDb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_db_text"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/teal_700"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
