@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.notesdemo.databinding.ActivityMainBinding
+import com.example.notesdemo.presentation.createnotes.CreateNotesFragment
 import com.example.notesdemo.presentation.notes.component.ViewNotesFragment
 import com.example.notesdemo.utils.ExtensionClass.replaceFragment
 
@@ -15,7 +16,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        replaceFragment(R.id.mainFragment, ViewNotesFragment())
+
+        if (savedInstanceState == null) {
+            replaceFragment(R.id.mainFragment, ViewNotesFragment())
+        }
     }
+
+
 
 }

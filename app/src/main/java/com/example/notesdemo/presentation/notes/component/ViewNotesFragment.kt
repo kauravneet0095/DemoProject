@@ -33,14 +33,14 @@ class ViewNotesFragment : Fragment() {
             this,
             NotesViewModelFactory((requireActivity().application as NotesApplication).repository)
         )[NotesViewModel::class.java]
-        CoroutineScope(Dispatchers.IO).launch {
-            setData()
-        }
-        return binding?.rvNotes
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        CoroutineScope(Dispatchers.Main).launch {
+//            setData()
+//        }
 //        setUpRv(notesViewModel?.getAllNotes())
 
     }
