@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@+id/navigation_create_notes">
+    app:startDestination="@+id/navigation_view_notes">
     <fragment
         android:id="@+id/navigation_create_notes"
         android:name="com.example.notesdemo.presentation.createnotes.CreateNotesFragment"
