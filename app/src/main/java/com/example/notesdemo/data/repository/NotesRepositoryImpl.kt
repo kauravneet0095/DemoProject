@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class NotesRepositoryImpl(val notesDao: NotesDao?) : NotesRepository {
 
-    private fun initialiseDB(context: Context): NotesDatabase? {
+    private fun initialiseDB(context: Context): NotesDatabase {
         return NotesDatabase.getInstance(context)
     }
 
