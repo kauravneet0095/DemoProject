@@ -78,10 +78,6 @@ class CreateNotesFragment : Fragment() {
                     }
 
                 }
-
-                findNavController().navigate(R.id.navigation_view_notes)
-
-
             }
         }
     }

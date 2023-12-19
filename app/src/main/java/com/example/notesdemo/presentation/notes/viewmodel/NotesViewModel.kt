@@ -6,9 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.notesdemo.NotesApplication
+import com.example.notesdemo.data.repository.NotesRepositoryImpl
 import com.example.notesdemo.domain.model.NotesEntity
 import com.example.notesdemo.domain.repository.NotesRepository
 import com.example.notesdemo.domain.use_cases.AddNotesUseCase
+import com.example.notesdemo.presentation.notes.component.model.NotesModel
 import kotlinx.coroutines.launch
 
 class NotesViewModel(repository: NotesRepository) : ViewModel() {
