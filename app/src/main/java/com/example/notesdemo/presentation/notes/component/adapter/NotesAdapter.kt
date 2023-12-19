@@ -28,9 +28,11 @@ class NotesAdapter(private var notesList: List<NotesEntity>, val context: Contex
         holder.binding?.tvNotesDesc?.text = notesList[position].description
         holder.binding?.tvRemindTime?.text = notesList[position].createdAt
         notesList[position].cardColor?.let {
-            holder.binding?.layoutMain?.setCardBackgroundColor(
-                it.toInt()
-            )
+            it.toIntOrNull()?.let { it1 ->
+                holder.binding?.layoutMain?.setCardBackgroundColor(
+                    it1
+                )
+            }
         }
     }
 
