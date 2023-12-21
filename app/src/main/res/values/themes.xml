@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.NotesDemo" parent="Base.Theme.NotesDemo" />
+
+    <style name="Theme.NotesDemo.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/gray</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/notes</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.NotesDemo</item>
+    </style>
 </resources>
