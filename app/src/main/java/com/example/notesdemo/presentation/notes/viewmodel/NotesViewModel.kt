@@ -5,31 +5,64 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.notesdemo.NotesApplication
-import com.example.notesdemo.data.repository.NotesRepositoryImpl
 import com.example.notesdemo.domain.model.NotesEntity
 import com.example.notesdemo.domain.repository.NotesRepository
 import com.example.notesdemo.domain.use_cases.AddNotesUseCase
-import com.example.notesdemo.presentation.notes.component.model.NotesModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NotesViewModel(repository: NotesRepository) : ViewModel() {
+open class NotesViewModel(repository: NotesRepository) : ViewModel() {
+
+    var editableNotesID: Int = 0
+
 
     private val notesUseCase: AddNotesUseCase by lazy {
         AddNotesUseCase(repository)
     }
 
-    fun addNotes(notesEntity: NotesEntity,context: Context, onNoteAdded: (String) -> Unit) {
+    open fun validateFields(title: String, desc: String): Boolean {
+        return !(title.isEmpty()|| desc.isEmpty())
+    }
+
+
+
+    fun addNotes(
+        notesEntity: NotesEntity,
+        context: Context,
+        onNoteAdded: (String) -> Unit
+    ) {
         viewModelScope.launch {
-            notesUseCase.addNotes(notesEntity,context)
+            notesUseCase.addNotes(notesEntity, context)
             onNoteAdded.invoke("Note Added Successfully !!")
         }
+    }
+
+    fun updateStudentDetails(
+        context: Context,
+        notesEntity: NotesEntity,
+        onNoteAdded: (String) -> Unit
+    ) {
+        viewModelScope.launch {
+            notesUseCase.updateStudentDetails(context, notesEntity)
+            onNoteAdded.invoke("Note updated Successfully !!")
+        }
+
     }
 
     suspend fun getAllNotes(): LiveData<List<NotesEntity>>? {
         var notesEntity: LiveData<List<NotesEntity>>? = null
         val job = viewModelScope.launch {
             notesEntity = notesUseCase.getAllNotes()
+        }
+        job.join()
+        return notesEntity
+    }
+
+    suspend fun getDataById(): NotesEntity? {
+        var notesEntity: NotesEntity? = null
+        val job = CoroutineScope(Dispatchers.IO).launch {
+            notesEntity = notesUseCase.getDataById(editableNotesID)
         }
         job.join()
         return notesEntity
