@@ -68,4 +68,8 @@ dependencies {
     implementation ("androidx.room:room-ktx:2.4.2")
     kapt ("androidx.room:room-compiler:2.4.2")
 
+    // Use: def instead of val if you are not using Kotlin Gradle(.kts)
+
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
 }

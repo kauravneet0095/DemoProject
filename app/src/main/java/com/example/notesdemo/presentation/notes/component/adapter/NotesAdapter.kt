@@ -26,7 +26,7 @@ class NotesAdapter(private var notesList: List<NotesEntity>, val context: Contex
     override fun onBindViewHolder(holder: NotesVH, position: Int) {
         holder.binding?.tvNotesTitle?.text = notesList[position].title
         holder.binding?.tvNotesDesc?.text = notesList[position].description
-        holder.binding?.tvRemindTime?.text = notesList[position].createdAt
+//        holder.binding?.tvRemindTime?.text = notesList[position].createdAt
         notesList[position].cardColor?.let {
             it.toIntOrNull()?.let { it1 ->
                 holder.binding?.layoutMain?.setCardBackgroundColor(
