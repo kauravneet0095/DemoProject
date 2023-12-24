@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,7 @@ import com.example.notesdemo.presentation.createnotes.CreateNotesFragment
 import com.example.notesdemo.presentation.notes.component.adapter.NotesAdapter
 import com.example.notesdemo.presentation.notes.viewmodel.NotesViewModel
 import com.example.notesdemo.presentation.notes.viewmodel.NotesViewModelFactory
+import com.example.notesdemo.presentation.updatenotes.UpdateNotesFragment
 import com.example.notesdemo.utils.ExtensionClass.replaceFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -44,10 +46,33 @@ class ViewNotesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as? AppCompatActivity)?.supportActionBar?.title = "View Notes"
         CoroutineScope(Dispatchers.Main).launch {
             notesViewModel?.getAllNotes()?.observe(
                 viewLifecycleOwner
-            ) { value -> setUpRv(value) }
+            ) { value ->
+                if (value.isEmpty()) {
+                    binding?.apply {
+                        rvNotes.visibility = View.GONE
+                        tvEmptyDb.visibility = View.VISIBLE
+                    }
+                } else {
+                    binding?.apply {
+                        tvEmptyDb.visibility = View.GONE
+                        rvNotes.visibility = View.VISIBLE
+                    }
+                }
+
+                setUpRv(value)
+            }
+        }
+        setListeners()
+    }
+
+    private fun setListeners() {
+        binding?.fabCreateNotes?.setOnClickListener {
+            replaceFragment(R.id.mainFragment, CreateNotesFragment())
+
         }
     }
 
@@ -58,15 +83,18 @@ class ViewNotesFragment : Fragment() {
         recyclerView?.layoutManager = staggeredGridLayoutManager
         val adapter = NotesAdapter(notesList, requireContext(), object : OnItemClickListener {
             override fun onItemClick(position: Int) {
+                Log.e("id", position.toString())
+                val receivingFragment = UpdateNotesFragment()
+                val bundle = Bundle()
+                bundle.putString("id", position.toString())
+                receivingFragment.arguments = bundle
 
-                    notesViewModel?.editableNotesID = position
-
-                    Log.e("id",position.toString())
-
-                replaceFragment(R.id.mainFragment, CreateNotesFragment(), true)
+                replaceFragment(R.id.mainFragment, receivingFragment, false)
 
             }
         })
         recyclerView?.adapter = adapter
     }
+
+
 }

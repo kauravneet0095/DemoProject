@@ -15,11 +15,11 @@ class AddNotesUseCase constructor(private val notesRepository: NotesRepository) 
         return notesRepository.getAllNotes()
     }
 
-    fun updateStudentDetails(context: Context, notesEntity: NotesEntity) {
-        notesRepository.updateStudentDetails(context, notesEntity)
+    fun updateNotes(context: Context, notesEntity: NotesEntity) {
+        notesRepository.updateNotes(context, notesEntity)
     }
 
-    fun getDataById(id: Int): NotesEntity? {
+    fun getDataById(id: Int): LiveData<NotesEntity>? {
         return notesRepository.getDataById(id)
     }
 }

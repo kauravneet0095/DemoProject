@@ -21,7 +21,7 @@ interface NotesDao {
     fun getAllNotesTest(): NotesEntity
 
     @Query("UPDATE user_notes SET title = :title,description = :description,cardColor = :cardColor,isEdited =:isEdited,createdAt = :createdAt,updatedAt = :updatedAt  Where id = :id")
-    fun updateStudentDetails(
+    fun updateNotes(
         id: Int,
         title: String?,
         description: String?,
@@ -30,6 +30,7 @@ interface NotesDao {
         createdAt: String?,
         updatedAt: String?
     )
+
     @Query("SELECT * FROM user_notes WHERE id LIKE :id")
-    fun getDataById(id: Int) : NotesEntity
+    fun getDataById(id: Int): LiveData<NotesEntity>?
 }

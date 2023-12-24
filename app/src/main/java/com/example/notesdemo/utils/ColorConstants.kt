@@ -3,7 +3,7 @@ package com.example.notesdemo.utils
 import android.content.Context
 import androidx.core.content.ContextCompat
 import com.example.notesdemo.R
-import com.example.notesdemo.presentation.createnotes.model.ColorPaletteModel
+import com.example.notesdemo.data.model.ColorPaletteModel
 
 object ColorConstants {
     fun getColors(context: Context): ArrayList<ColorPaletteModel> {

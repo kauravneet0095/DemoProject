@@ -2,19 +2,39 @@ package com.example.notesdemo.presentation.notes.viewmodel
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.notesdemo.domain.model.NotesEntity
 import com.example.notesdemo.domain.repository.NotesRepository
 import com.example.notesdemo.domain.use_cases.AddNotesUseCase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 open class NotesViewModel(repository: NotesRepository) : ViewModel() {
+    val titleTextObserver = MutableLiveData<String>()
+    val descTextObserver = MutableLiveData<String>()
 
-    var editableNotesID: Int = 0
+    fun onTitleTextChanged(text: CharSequence?) {
+        if (text.toString().isNotEmpty()) {
+            titleTextObserver.value = text.toString()
+        }
+    }
+
+    fun onDescTextChanged(text: CharSequence?) {
+        if (text.toString().isNotEmpty()) {
+            descTextObserver.value = text.toString()
+        }
+    }
+
+    fun isTitleEmpty() =
+        titleTextObserver.value.isNullOrEmpty() || titleTextObserver.value.toString().trim()
+            .isEmpty()
+
+
+    fun isDescEmpty() =
+        descTextObserver.value.isNullOrEmpty() || descTextObserver.value.toString().trim()
+            .isEmpty()
 
 
     private val notesUseCase: AddNotesUseCase by lazy {
@@ -22,9 +42,8 @@ open class NotesViewModel(repository: NotesRepository) : ViewModel() {
     }
 
     open fun validateFields(title: String, desc: String): Boolean {
-        return !(title.isEmpty()|| desc.isEmpty())
+        return !(title.isEmpty() || desc.isEmpty())
     }
-
 
 
     fun addNotes(
@@ -38,13 +57,13 @@ open class NotesViewModel(repository: NotesRepository) : ViewModel() {
         }
     }
 
-    fun updateStudentDetails(
+    fun updateNotes(
         context: Context,
         notesEntity: NotesEntity,
         onNoteAdded: (String) -> Unit
     ) {
         viewModelScope.launch {
-            notesUseCase.updateStudentDetails(context, notesEntity)
+            notesUseCase.updateNotes(context, notesEntity)
             onNoteAdded.invoke("Note updated Successfully !!")
         }
 
@@ -59,10 +78,10 @@ open class NotesViewModel(repository: NotesRepository) : ViewModel() {
         return notesEntity
     }
 
-    suspend fun getDataById(): NotesEntity? {
-        var notesEntity: NotesEntity? = null
-        val job = CoroutineScope(Dispatchers.IO).launch {
-            notesEntity = notesUseCase.getDataById(editableNotesID)
+    suspend fun getDataById(id: Int): LiveData<NotesEntity>? {
+        var notesEntity: LiveData<NotesEntity>? = null
+        val job = viewModelScope.launch {
+            notesEntity = notesUseCase.getDataById(id)
         }
         job.join()
         return notesEntity

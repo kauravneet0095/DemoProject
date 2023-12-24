@@ -17,7 +17,8 @@
                 android:id="@+id/img_edit_note"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
+                android:layout_margin="8dp"
+                android:contentDescription="@string/imageview_to_edit"
                 android:src="@drawable/ic_edit_notes"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -28,8 +29,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-
                 android:fontFamily="@font/neon_font"
                 android:text="Coffee"
                 android:textSize="20sp"

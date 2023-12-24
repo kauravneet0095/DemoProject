@@ -27,9 +27,9 @@ class NotesRepositoryImpl(val notesDao: NotesDao?) : NotesRepository {
         return notesDao?.getAllNotes()
     }
 
-    override fun updateStudentDetails(context: Context, notesEntity: NotesEntity) {
+    override fun updateNotes(context: Context, notesEntity: NotesEntity) {
         CoroutineScope(Dispatchers.IO).launch {
-            notesDao?.updateStudentDetails(
+            notesDao?.updateNotes(
                 notesEntity.id,
                 notesEntity.title,
                 notesEntity.description,
@@ -41,7 +41,7 @@ class NotesRepositoryImpl(val notesDao: NotesDao?) : NotesRepository {
         }
     }
 
-    override fun getDataById(id : Int): NotesEntity? {
+    override fun getDataById(id: Int): LiveData<NotesEntity>? {
         return notesDao?.getDataById(id)
     }
 }

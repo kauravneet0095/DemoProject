@@ -5,6 +5,8 @@
     <string name="def_text_enter_description">Enter description</string>
     <string name="def_text_enter_note_title">Enter Note Title</string>
     <string name="def_text_save_notes">Save Notes</string>
+    <string name="def_text_update_notes">Update Notes</string>
     <string name="no_db_text">No data found</string>
     <string name="this_is_action_button">This is action button</string>
+    <string name="imageview_to_edit">imageview to edit</string>
 </resources>
