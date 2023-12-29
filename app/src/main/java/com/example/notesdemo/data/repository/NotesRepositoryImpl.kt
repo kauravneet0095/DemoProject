@@ -26,6 +26,24 @@ class NotesRepositoryImpl(val notesDao: NotesDao?) : NotesRepository {
     override fun getAllNotes(): LiveData<List<NotesEntity>>? {
         return notesDao?.getAllNotes()
     }
+
+    override fun updateNotes(context: Context, notesEntity: NotesEntity) {
+        CoroutineScope(Dispatchers.IO).launch {
+            notesDao?.updateNotes(
+                notesEntity.id,
+                notesEntity.title,
+                notesEntity.description,
+                notesEntity.cardColor,
+                notesEntity.isEdited,
+                notesEntity.createdAt,
+                notesEntity.updatedAt
+            )
+        }
+    }
+
+    override fun getDataById(id: Int): LiveData<NotesEntity>? {
+        return notesDao?.getDataById(id)
+    }
 }
 
 

@@ -16,4 +16,21 @@ interface NotesDao {
     @Query("SELECT * FROM user_notes")
     fun getAllNotes(): LiveData<List<NotesEntity>>
 
+    // for db unit testing
+    @Query("SELECT * FROM user_notes")
+    fun getAllNotesTest(): NotesEntity
+
+    @Query("UPDATE user_notes SET title = :title,description = :description,cardColor = :cardColor,isEdited =:isEdited,createdAt = :createdAt,updatedAt = :updatedAt  Where id = :id")
+    fun updateNotes(
+        id: Int,
+        title: String?,
+        description: String?,
+        cardColor: String?,
+        isEdited: Boolean?,
+        createdAt: String?,
+        updatedAt: String?
+    )
+
+    @Query("SELECT * FROM user_notes WHERE id LIKE :id")
+    fun getDataById(id: Int): LiveData<NotesEntity>?
 }

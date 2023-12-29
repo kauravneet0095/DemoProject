@@ -7,11 +7,19 @@ import com.example.notesdemo.domain.repository.NotesRepository
 
 class AddNotesUseCase constructor(private val notesRepository: NotesRepository) {
 
-    fun addNotes(note: NotesEntity,context: Context) {
-        notesRepository.addNote(note,context)
+    fun addNotes(note: NotesEntity, context: Context) {
+        notesRepository.addNote(note, context)
     }
 
     fun getAllNotes(): LiveData<List<NotesEntity>>? {
         return notesRepository.getAllNotes()
+    }
+
+    fun updateNotes(context: Context, notesEntity: NotesEntity) {
+        notesRepository.updateNotes(context, notesEntity)
+    }
+
+    fun getDataById(id: Int): LiveData<NotesEntity>? {
+        return notesRepository.getDataById(id)
     }
 }
