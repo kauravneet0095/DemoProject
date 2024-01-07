@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="off_white">#F7F7F7</color>
     <color name="red">#85E14949</color>
     <color name="maroon">#4D612121</color>
     <color name="pink">#3BD866AE</color>
@@ -9,4 +10,5 @@
     <color name="magenta">#40615DF6</color>
     <color name="orange">#63FF5722</color>
     <color name="brown">#402E0404</color>
+    <color name="primary">#06BF5B</color>
 </resources>

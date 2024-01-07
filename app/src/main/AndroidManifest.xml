@@ -14,7 +14,7 @@
         android:theme="@style/Theme.NotesDemo"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.mainactivity.components.MainActivity"
             android:theme="@style/Theme.NotesDemo.SplashScreen"
             android:exported="true">
             <intent-filter>
