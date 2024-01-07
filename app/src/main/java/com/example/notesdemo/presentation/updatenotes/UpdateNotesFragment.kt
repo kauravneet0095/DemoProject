@@ -1,5 +1,6 @@
 package com.example.notesdemo.presentation.updatenotes
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.example.notesdemo.adapter.ColorPaletteAdapter
 import com.example.notesdemo.data.model.ColorPaletteModel
 import com.example.notesdemo.databinding.FragmentUpdateNotesBinding
 import com.example.notesdemo.domain.model.NotesEntity
+import com.example.notesdemo.presentation.mainactivity.components.MainActivity
 import com.example.notesdemo.presentation.notes.component.ViewNotesFragment
 import com.example.notesdemo.presentation.notes.viewmodel.NotesViewModel
 import com.example.notesdemo.presentation.notes.viewmodel.NotesViewModelFactory
@@ -29,8 +31,13 @@ class UpdateNotesFragment : Fragment() {
     private var binding: FragmentUpdateNotesBinding? = null
     private var selectedColor: ColorPaletteModel? = null
     private var notesViewModel: NotesViewModel? = null
+    private var mainActivity: MainActivity? = null
     private var editableDataId = 0
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mainActivity = context as MainActivity
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -49,7 +56,7 @@ class UpdateNotesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? AppCompatActivity)?.supportActionBar?.title = "Update Notes"
+        mainActivity?.setAppBarTitle(getString(R.string.def_text_update_notes), true)
         setColorOptionsAdapter()
         prepopulateDataToUpdate()
         setListeners()
@@ -94,7 +101,7 @@ class UpdateNotesFragment : Fragment() {
                     .show()
             } else {
                 val notesEntity = NotesEntity(
-                    0, title = binding?.etTitle?.text.toString(),
+                    editableDataId, title = binding?.etTitle?.text.toString(),
                     description = binding?.etDesc?.text.toString(),
                     cardColor = selectedColor?.paletteColor.toString()
                 )
@@ -102,13 +109,7 @@ class UpdateNotesFragment : Fragment() {
                 notesViewModel?.updateNotes(
                     requireContext(), notesEntity,
                 ) { message ->
-                    println(message)
-                    runBlocking {
-                        notesViewModel?.getAllNotes()?.observe(
-                            viewLifecycleOwner
-                        ) { value -> Log.e("NotesDb", value?.size.toString()) }
-                    }
-                    replaceFragment(R.id.mainFragment, ViewNotesFragment(), false)
+                   requireActivity().supportFragmentManager.popBackStack()
                 }
             }
         }

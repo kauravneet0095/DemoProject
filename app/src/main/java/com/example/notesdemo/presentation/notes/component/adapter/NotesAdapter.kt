@@ -36,7 +36,7 @@ class NotesAdapter(
         }
         notesList[position].cardColor?.let {
             it.toIntOrNull()?.let { it1 ->
-                holder.binding?.layoutMain?.setCardBackgroundColor(
+                holder.binding?.parentLay?.setBackgroundColor(
                     it1
                 )
             }

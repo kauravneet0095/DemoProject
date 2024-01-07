@@ -9,4 +9,9 @@
     <string name="no_db_text">No data found</string>
     <string name="this_is_action_button">This is action button</string>
     <string name="imageview_to_edit">imageview to edit</string>
+    <string name="title_field_can_t_be_empty">Title field can\'t be empty.</string>
+    <string name="description_field_can_t_be_empty">Description field can\'t be empty.</string>
+    <string name="please_select_note_color">Please select note background color.</string>
+    <string name="view_notes">View Notes</string>
+    <string name="create_notes">Create Notes</string>
 </resources>

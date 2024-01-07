@@ -11,44 +11,43 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_notes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="10dp"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintWidth_percent="0.98"
             app:spanCount="2"
             tools:itemCount="20"
             tools:listitem="@layout/notes_tiles" />
-
 
         <TextView
             android:id="@+id/tvEmptyDb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/no_db_text"
-            android:textSize="16sp"
             android:gravity="center"
+            android:text="@string/no_db_text"
+            android:textColor="@color/teal_700"
+            android:textSize="16sp"
             android:visibility="gone"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:textColor="@color/teal_700"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_create_notes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="32dp"
-            android:layout_marginVertical="32dp"
+            android:backgroundTint="@color/primary"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="16dp"
             android:contentDescription="@string/this_is_action_button"
             android:src="@drawable/baseline_note_add_24"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />-->
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
