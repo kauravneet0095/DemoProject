@@ -58,12 +58,12 @@ open class NotesViewModel(repository: NotesRepository) : ViewModel() {
     }
 
     fun updateNotes(
-        context: Context,
+        notesEntity1: Context,
         notesEntity: NotesEntity,
         onNoteAdded: (String) -> Unit
     ) {
         viewModelScope.launch {
-            notesUseCase.updateNotes(context, notesEntity)
+            notesUseCase.updateNotes(notesEntity)
             onNoteAdded.invoke("Note updated Successfully !!")
         }
 

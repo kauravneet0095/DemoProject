@@ -15,8 +15,8 @@ class AddNotesUseCase constructor(private val notesRepository: NotesRepository) 
         return notesRepository.getAllNotes()
     }
 
-    fun updateNotes(context: Context, notesEntity: NotesEntity) {
-        notesRepository.updateNotes(context, notesEntity)
+    fun updateNotes(notesEntity: NotesEntity) {
+        notesRepository.updateNotes(notesEntity)
     }
 
     fun getDataById(id: Int): LiveData<NotesEntity>? {

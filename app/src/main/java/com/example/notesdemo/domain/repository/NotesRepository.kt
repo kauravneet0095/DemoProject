@@ -8,7 +8,7 @@ interface NotesRepository {
     fun addNote(notesEntity: NotesEntity,context: Context)
     fun getAllNotes(): LiveData<List<NotesEntity>>?
 
-    fun updateNotes(context: Context,notesEntity: NotesEntity)
+    fun updateNotes(notesEntity: NotesEntity)
 
     fun getDataById(id : Int): LiveData<NotesEntity>?
 
