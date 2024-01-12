@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.notesdemo.NotesApplication
@@ -17,15 +16,12 @@ import com.example.notesdemo.data.model.ColorPaletteModel
 import com.example.notesdemo.databinding.FragmentUpdateNotesBinding
 import com.example.notesdemo.domain.model.NotesEntity
 import com.example.notesdemo.presentation.mainactivity.components.MainActivity
-import com.example.notesdemo.presentation.notes.component.ViewNotesFragment
 import com.example.notesdemo.presentation.notes.viewmodel.NotesViewModel
 import com.example.notesdemo.presentation.notes.viewmodel.NotesViewModelFactory
 import com.example.notesdemo.utils.ColorConstants
-import com.example.notesdemo.utils.ExtensionClass.replaceFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class UpdateNotesFragment : Fragment() {
     private var binding: FragmentUpdateNotesBinding? = null

@@ -27,7 +27,7 @@ class NotesRepositoryImpl(val notesDao: NotesDao?) : NotesRepository {
         return notesDao?.getAllNotes()
     }
 
-    override fun updateNotes(context: Context, notesEntity: NotesEntity) {
+    override fun updateNotes(notesEntity: NotesEntity) {
         CoroutineScope(Dispatchers.IO).launch {
             notesDao?.updateNotes(
                 notesEntity.id,
